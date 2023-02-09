@@ -16,7 +16,19 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 7.0.x
+
       - name: Install dependencies
         run: dotnet restore MunsonPickles.Api/MunsonPickles.Api.csproj
+
       - name: Build with dotnet
         run: dotnet build MunsonPickles.Api/MunsonPickles.Api.csproj --configuration Release --no-restore
+      
+      - name: Publish with dotnet
+        run: dotnet publish MunsonPickle.Api/MunsonPickles.Api.csproj -c Release --self-contained true /p:UseAppHost=true -o ./publish
+      
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: "munsonpickles-api"
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./publish
+    
