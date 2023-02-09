@@ -24,7 +24,7 @@ jobs:
         run: dotnet build MunsonPickles.Api/MunsonPickles.Api.csproj --configuration Release --no-restore
       
       - name: Publish with dotnet
-        run: dotnet publish MunsonPickle.Api/MunsonPickles.Api.csproj -c Release --self-contained true /p:UseAppHost=true -o ./publish
+        run: dotnet publish MunsonPickles.Api/MunsonPickles.Api.csproj -c Release --self-contained true /p:UseAppHost=true -o ./publish
       
       - uses: azure/webapps-deploy@v2
         with:
