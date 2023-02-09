@@ -7,6 +7,9 @@ on:
   #push:
   #  branches: [ "main "]
 
+env:
+  AZURE_WEBAPP_NAME: "app-munson-api-eastus-dev-001" # set this to your application's name
+
 jobs:
   build:
     runs-on: windows-latest
@@ -29,7 +32,7 @@ jobs:
       - uses: azure/webapps-deploy@v2
         name: Deploy to Azure Web App
         with:
-          app-name: "munsonpickles-api"
+          app-name: "${{ env.AZURE_WEBAPP_NAME }}"
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: ./publish
     
