@@ -11,16 +11,12 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 7.0.x
+      - name: Install dependencies
+        run: dotnet restore MunsonPickles.Api/MunsonPickles.Api.csproj
       - name: Build with dotnet
-        run: dotnet build MunsonPickles.Api/MunsonPickles.Api.csproj --configuration Release
-      #- name: Publish to Azure Web App
-      #  uses: azure/webapps-deploy@v2
-      #  with:
-      #    app-name: "munsonpickles-api"
-      #    publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-      #    package: ./MunsonPickles.Api/bin/Release/net5.0/publish
+        run: dotnet build MunsonPickles.Api/MunsonPickles.Api.csproj --configuration Release --no-restore
