@@ -12,7 +12,7 @@ env:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET Core
@@ -27,7 +27,7 @@ jobs:
         run: dotnet build MunsonPickles.Api/MunsonPickles.Api.csproj --configuration Release --no-restore
       
       - name: Publish with dotnet
-        run: dotnet publish MunsonPickles.Api/MunsonPickles.Api.csproj -c Release --self-contained true /p:UseAppHost=true -o ./publish
+        run: dotnet publish MunsonPickles.Api/MunsonPickles.Api.csproj -c Release -o ./publish
       
       - uses: azure/webapps-deploy@v2
         name: Deploy to Azure Web App
