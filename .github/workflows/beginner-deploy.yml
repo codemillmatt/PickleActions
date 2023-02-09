@@ -27,6 +27,7 @@ jobs:
         run: dotnet publish MunsonPickles.Api/MunsonPickles.Api.csproj -c Release --self-contained true /p:UseAppHost=true -o ./publish
       
       - uses: azure/webapps-deploy@v2
+        name: Deploy to Azure Web App
         with:
           app-name: "munsonpickles-api"
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
